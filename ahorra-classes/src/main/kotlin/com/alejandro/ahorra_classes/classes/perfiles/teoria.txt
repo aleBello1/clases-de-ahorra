@@ -1,0 +1,25 @@
+
+
+PERFILES
+
+Son archivos de configuracion. Esto viven en la carpeta /resouces y son de tipo .yaml, yml o .properties.
+Es indiferente cual se ocupe.
+Tienen que tener la codificacion utf-8.
+
+Tipos de perfiles | Archivo que lo representa | su principal uso
+default             application.yaml
+local               application-local.yaml    hacer cosas locales (la extraccion en local******)
+test                application-test.yaml     hacer pruebas de integracion y unitarias
+dev                 application-dev.yaml      ambiente de pruebas
+prod                application-prod.yaml     ambiente de prod (lo que usa el usuario fianal)
+custom              application-custom.yaml
+
+Nota: El perfil default siempre que se levante la app, las configuracioens de este perfil se leeeran.
+
+*En el perfil default*
+spring:
+  profiles:
+    active: dev ó
+spring.profiles.active=dev -> Permite seleccionar el perfil activo.
+
+spring.profiles.include=secrets -> Para activar un perfil adicional.
