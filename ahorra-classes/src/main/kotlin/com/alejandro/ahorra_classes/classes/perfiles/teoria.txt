@@ -7,19 +7,27 @@ Es indiferente cual se ocupe.
 Tienen que tener la codificacion utf-8.
 
 Tipos de perfiles | Archivo que lo representa | su principal uso
-default             application.yaml
+default             application.yaml          controlar cual perfil o perfiles activar
 local               application-local.yaml    hacer cosas locales (la extraccion en local******)
 test                application-test.yaml     hacer pruebas de integracion y unitarias
 dev                 application-dev.yaml      ambiente de pruebas
 prod                application-prod.yaml     ambiente de prod (lo que usa el usuario fianal)
-custom              application-custom.yaml
+custom              application-custom.yaml   añadir configuraciones comunes (configuraciones presentes en todos los demas perfiles)
 
 Nota: El perfil default siempre que se levante la app, las configuracioens de este perfil se leeeran.
+Como Spring siempre carga primero el archivo default (application.properties) como configuración base o común, es
+en este archivo donde se coloca la instrucción de cual perfil seleccionar.
+Se puede tener unas configuraciones en el perfil default y otras configuraciones en determinado perfil,
+si alguna de las configuraciones de determinado perfil son las mismas que las de default, se sobreescribiran. Esto
+permite tener propiedades comunes para todos los perfiles y solo diferencias específicas en cada perfil.
 
-*En el perfil default*
+En el perfil default -----------------------
+
+*Si es de tipo .yaml ó .yml*
 spring:
   profiles:
-    active: dev ó
+    active: dev
+*ó Si es de tipo .properties*
 spring.profiles.active=dev -> Permite seleccionar el perfil activo.
 
 spring.profiles.include=secrets -> Para activar un perfil adicional.
