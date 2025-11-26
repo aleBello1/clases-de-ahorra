@@ -21,7 +21,7 @@ GIT FLOW
 git flow init: Es para que puedas hacer todos los comandos de git flow.
     Te pedira el nombre que le quieres dar a cada rama, lo normal es dejar los nombre por default.
 
-git branck nombreRama -> Para crear una rama.
+git branch nombreRama -> Para crear una rama.
 
 git switch nombreRama -> Para cambiarte a esa rama.
 
@@ -31,6 +31,7 @@ git flow feature start nombreRama -> Toma como base la rama develop y crea una r
     Despues arreglas el bug en esta rama.
 
 git flow finish start nombreRama -> Fusionara la rama 'feature/nombreRama' con la rama develop.
+    Se ejecuta cuando se termine de arreglar el bug para incorporar el nuebo codigo a la rama develop.
 
 ramas realese ---------------------------------------------
 
@@ -46,6 +47,7 @@ git flow release finish vx.y.z -> Fusionara la rama 'realese/nombreRama' con la 
     i: insert. para que te deje escribir.
     esc: escape: para dejar de escribir.
     :wq! -> para guardar el mensaje y enviarlo.
+    Nota: Antes de ejecutar este comando se debe asegurar que el perfil activo es el de prod.
 
 Nota: Antes de hacer un feature o un realse, debes actualizadas las ramas develop y main.
     git pull develop y git pull main. ********
