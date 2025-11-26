@@ -1,0 +1,51 @@
+
+
+RAMAS
+
+main / master: El codigo final y es la que usamos para servir peticiones al cliente. Produccion.
+    Tiene su propia db.
+develop: Esta rama es identica a la rama main, solo que esta se usa para hacer pruebas.
+    Ambiente de pruebas. Tiene su propia db.
+feature: Se crea una rama feature para arreglar bugs pequeños.
+realease: Se crea una realese para liberar (subir a produccion) varias featerues.
+    Se toma como base la rama develop y el contenido de esta rama con develop y con master. ****
+hot fix: Es para arreglar problemas produccion.
+    Se toma como base la rama main y cuando se arregla el proeblemas de produccion, se hace merge (fusionar) el contenido de esta
+    rama con develop y con master. ****
+
+Nota: Lo normal es resolver varias features y despues hacer un realese. **
+
+
+GIT FLOW
+
+git flow init: Es para que puedas hacer todos los comandos de git flow.
+    Te pedira el nombre que le quieres dar a cada rama, lo normal es dejar los nombre por default.
+
+git branck nombreRama -> Para crear una rama.
+
+git switch nombreRama -> Para cambiarte a esa rama.
+
+ramas feature ---------------------------------------------
+
+git flow feature start nombreRama -> Toma como base la rama develop y crea una rama con este nombre: 'feature/nombreRama'.
+    Despues arreglas el bug en esta rama.
+
+git flow finish start nombreRama -> Fusionara la rama 'feature/nombreRama' con la rama develop.
+
+ramas realese ---------------------------------------------
+
+git tag -> Te devuelve todos los tags.
+    Es decir la version del proyecto: por ejemplo v1.1.4, v1.6.7, etc.
+    Al numero que te de, le sumas uno por ejemplo si te v1.1.4 entonces tu le pones esto v1.1.5.
+
+git flow release start vx.y.z -> Toma como base la rama devlop y crea una rama con este nombre: 'realese/nombreRama'.
+
+git flow release finish vx.y.z -> Fusionara la rama 'realese/nombreRama' con la rama master.
+    Te pide 3 mensajes: 1. el merge en la rama main, 2. el mensaje en el tag y el 3. el merge en la
+    rama develop.
+    i: insert. para que te deje escribir.
+    esc: escape: para dejar de escribir.
+    :wq! -> para guardar el mensaje y enviarlo.
+
+Nota: Antes de hacer un feature o un realse, debes actualizadas las ramas develop y main.
+    git pull develop y git pull main. ********
