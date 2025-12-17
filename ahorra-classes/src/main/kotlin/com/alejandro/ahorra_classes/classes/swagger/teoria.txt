@@ -1,0 +1,63 @@
+Framework opensource utilizando principalmente para documentar api's rest pero
+tambien permite diseñar, construir y consumir/probar las api (como un cliente, similar a
+postman).
+
+https://springdoc.org/
+
+Hay dos maneras de implementar swagger:
+1. Con anotacion en las clases controller. Esta se usa en ahorra.
+Desventaja: deja muy sucas las clases controller, porque las llena de anotaciones
+Ventaja: es muy sencilla, porque metes anotaciones y se crea en automatico el swagger.
+
+2. Utilizando archivos yaml.
+Ventaja: Deja las clases controller.
+Desvtaja: es mucha talacha.
+
+Agregar dependencia para usar swagger al pom.xml:
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>x.x.x.x</version>
+</dependency>
+
+ANOTACIONES:
+
+@Tag(name = "catalog-bank", description = "Catalog Bank Controller")
+Hidden -> PARA NO MSOTRAR DETERMINADO ENTPOINT
+@Operation(
+        summary = "Obtiene la lista de todos los bancos que son aceptados, junto con su id",
+        description = "idBanco : Nombre Banco"
+    ) -> EQUIVALENTE A TAG PERO PARA UN SOLO ENDPOINT
+
+*En openapi.yaml*
+servers:
+  - localshots:8081: local
+  - ipInstanciaEc2Dev:5000: dev
+  - ipInstanciaEc2Prod:5001: prod
+
+ lo equivlaente es:
+@Configuration
+class OpenApiConfig {
+
+    @Value("\${url-domain}")
+    private lateinit var urlDomain: String
+
+    @Bean
+    fun customOpenAPI(): OpenAPI {
+        val server = Server()
+        server.url = urlDomain
+
+        return OpenAPI()
+            .servers(listOf(server))
+            .components(Components())
+            .info(
+                Info().title("AFIRME WS").description(
+                    """
+                        CAR -> Automovil Individual.
+                        TRACK -> Camiones Individuales
+                        ALL_TERRAIN -> Pick Up
+                    """.trimIndent()
+                )
+            )
+    }
+}
