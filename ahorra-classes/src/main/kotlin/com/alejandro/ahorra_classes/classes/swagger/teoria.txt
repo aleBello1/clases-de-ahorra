@@ -13,6 +13,8 @@ Ventaja: es muy sencilla, porque metes anotaciones y se crea en automatico el sw
 Ventaja: Deja las clases controller.
 Desvtaja: es mucha talacha.
 
+Nota: se usa una manera u otra, las dos al mismo tiempo no se pueden.
+
 Agregar dependencia para usar swagger al pom.xml:
 <dependency>
     <groupId>org.springdoc</groupId>
@@ -20,11 +22,11 @@ Agregar dependencia para usar swagger al pom.xml:
     <version>x.x.x.x</version>
 </dependency>
 
-ANOTACIONES:
+ANOTACIONES MAS IMPORTANTES:
 
-@Tag(name = "catalog-bank", description = "Catalog Bank Controller")
-Hidden -> PARA NO MSOTRAR DETERMINADO ENTPOINT
-@Operation(
+- @Tag(name = "catalog-bank", description = "Catalog Bank Controller")
+- Hidden -> PARA NO MSOTRAR DETERMINADO ENTPOINT
+- @Operation(
         summary = "Obtiene la lista de todos los bancos que son aceptados, junto con su id",
         description = "idBanco : Nombre Banco"
     ) -> EQUIVALENTE A TAG PERO PARA UN SOLO ENDPOINT
@@ -35,7 +37,7 @@ servers:
   - ipInstanciaEc2Dev:5000: dev
   - ipInstanciaEc2Prod:5001: prod
 
- lo equivlaente es:
+Lo equivlaente (cuando se usa anotaciones) es agregar este codigo:
 @Configuration
 class OpenApiConfig {
 
@@ -61,3 +63,7 @@ class OpenApiConfig {
             )
     }
 }
+
+Nota: url domain se inyecta desde el perfil activo.
+Recomendacion: No usar la configuracion de server para que se inyecte en automatico la propia
+ip del proyecto en el swagger.
